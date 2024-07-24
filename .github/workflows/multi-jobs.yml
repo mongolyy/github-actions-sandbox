@@ -20,11 +20,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           path: download
-      - name: Print the content of the log file
-        run: ls -la download
-      - name: Print the content of the log file
-        run: ls -R download
-      - name: Print the content of the log file
-        run: find download -type f
       - name: Print the file count
         run: find download -type f | wc -l
+      - name: Print the first 30 files
+        run: find download -type f | head -n 30
