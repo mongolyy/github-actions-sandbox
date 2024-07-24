@@ -18,11 +18,13 @@ jobs:
     steps:
       - name: Download a single artifact
         uses: actions/download-artifact@v4
+        with:
+          path: download
       - name: Print the content of the log file
-        run: ls -la
+        run: ls -la download
       - name: Print the content of the log file
-        run: ls -R
+        run: ls -R download
       - name: Print the content of the log file
-        run: ls -F
+        run: find download -type f
       - name: Print the file count
-        run: ls -F | grep -v / | wc -l
+        run: find download -type f | wc -l
