@@ -1,0 +1,28 @@
+name: multi-job
+on: [ push ]
+jobs:
+  job1:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Run a one-line script
+        run: expr 1 + 1 > output1.log
+      - name: Upload a log file
+        uses: actions/upload-artifact@v4
+        with:
+          path: .
+  job2:
+    runs-on: ubuntu-latest
+    needs: [job1]
+    steps:
+      - name: Download a single artifact
+        uses: actions/download-artifact@v4
+        with:
+          path: artifact
+      - name: Print the content of the log file
+        run: ls -la artifact
+      - name: Print the content of the log file
+        run: ls -F artifact
+      - name: Print the file count
+        run: ls -F artifact | grep -v / | wc -l
